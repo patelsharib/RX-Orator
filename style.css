@@ -1,0 +1,88 @@
+/* Dark Mode Aesthetic with Soft Gradient */
+body {
+    background: linear-gradient(135deg, #ff9999, #ff99cc); /* Soft pink to peach gradient */
+    background-size: cover;
+    background-position: center;
+    color: #4d4d4d; /* Softer text color */
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container */
+.container {
+    text-align: center;
+    padding: 30px;
+    border: 5px solid #005760; /* Light border matching the theme */
+    background-color: #ffe6e6; /* Light pinkish background */
+    box-shadow: 0px 0px 20px 5px rgba(255, 182, 193, 0.2); /* Softer shadow */
+    width: 600px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 25px; /* Curved container */
+    transition: all 0.5s ease;
+}
+
+/* Expanded Container */
+.container.expanded {
+    width: 800px;
+    height: 700px;
+    border-radius: 30px; /* Rounded curve when expanded */
+}
+
+/* Collapsed Container */
+.container.collapsed {
+    width: 500px;
+    height: 700px;
+    border-radius: 50px; /* Smaller curve when collapsed */
+}
+
+/* Title */
+.title {
+    font-size: 2.5rem;
+    color: #005760; /* Pure white title */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Soft text shadow */
+    margin-bottom: 20px;
+}
+
+/* Input Fields */
+input, textarea {
+    background-color: #ffffff;
+    color: #005760;
+    border: 1.99px solid #005760;
+    padding: 10px;
+    border-radius: 50px; /* Rounded input fields */
+    margin: 10px 0;
+    width: calc(100% - 40px); /* Adjust width */
+    font-size: 1rem;
+}
+
+/* Buttons */
+.voice-btn, .upload-btn, .reset-btn, .adjust-btn ,.stop-btn {
+    background: linear-gradient(45deg, #ffcc99, #ff99cc); /* Light pink gradient */
+    color: #005760;
+    border: none;
+    border-radius: 25px; /* Rounded buttons */
+    padding: 15px 30px;
+    margin: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: transform 0.3s;
+}
+
+.voice-btn:hover, .upload-btn:hover, .reset-btn:hover, .adjust-btn:hover {
+    transform: scale(1.05); /* Slight hover effect */
+}
+
+/* Button Section Layout */
+.button-section {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    flex-wrap: wrap;
+}
