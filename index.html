@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctor's Voice Assistant</title>
+    <link rel="stylesheet" href="style.css"> <!-- Link to your CSS file -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js" defer></script>
+    <script src="script.js" defer></script> <!-- Link to your JavaScript file -->
+    <style>
+        /* Load custom fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&display=swap'); /* Luxury font example */
+    </style>
+</head>
+<body>
+    <div class="container collapsed" id="mainContainer">
+        <h1 class="title">Doctor's Voice Assistant</h1>
+
+        <div class="input-section">
+            <label for="patient-name">Patient Name:</label>
+            <input type="text" id="patient-name" placeholder="Enter Patient Name">
+
+            <label for="symptoms">Symptoms:</label>
+            <textarea id="symptoms" placeholder="Describe Symptoms"></textarea>
+
+            <label for="medications">Medications:</label>
+            <textarea id="medications" placeholder="List Medications"></textarea>
+
+            <label for="duration">Duration:</label>
+            <textarea id="duration" placeholder="Say 'after breakfast', 'after lunch', or 'after dinner'..."></textarea>
+        </div>
+
+        <div class="button-section">
+            <button class="voice-btn" id="start-btn">Start Voice Input</button>
+            <button class="stop-btn" id="stop-btn">Stop Recording</button>
+            <button class="upload-btn" id="upload-btn">Upload PDF</button>
+            <button class="reset-btn" id="reset-btn">Reset Fields</button>
+            <button class="adjust-btn" id="adjustBtn">Expand</button>
+        </div>
+    </div>
+
+    <script>
+      window.onload = function () {
+          const { jsPDF } = window.jspdf; // Access jsPDF
+
+          document.getElementById('upload-btn').addEventListener('click', () => {
+              const patientName = document.getElementById('patient-name').value;
+              const symptoms = document.getElementById('symptoms').value;
+              const medications = document.getElementById('medications').value;
+              const duration = document.getElementById('duration').value;
+
+              if (!patientName) {
+                  alert('Please enter the patient\'s name.');
+                  return;
+              }
+
+              const doc = new jsPDF();
+              doc.setFont('Lora', 'bold'); // Set luxury font to bold
+              doc.setFontSize(14); // Set font size
+
+              // Load and add the logo image
+              const img = new Image();
+              img.src = 'medecho.png'; // Ensure this is the correct path to the image
+              img.onload = function() {
+                  doc.addImage(img, 'PNG', 10, 10, 30, 20); // Logo placement
+
+                  // Add the business name and info aligned to the right
+                  doc.text('Clinic Name', 160, 20, { align: 'right' });
+                  doc.text('Agripada, Mumbai, Maharashtra', 160, 30, { align: 'right' });
+                  doc.text('(+91) 909090909', 160, 35, { align: 'right' });
+                  doc.text('email@example.com', 160, 40, { align: 'right' });
+                  doc.text('info@example.al', 160, 45, { align: 'right' });
+                  doc.text('www.example.al', 160, 50, { align: 'right' });
+
+                  doc.text("Patient Report", 105, 65, { align: 'center' });
+
+                  // Add patient data to the PDF one by one
+                  doc.text(`Patient Name: ${patientName}`, 20, 80);
+                  doc.text(`Symptoms: ${symptoms}`, 20, 100);
+                  doc.text(`Medications: ${medications.replace(/\n/g, ', ')}`, 20, 120); // Medications as a comma-separated string
+                  doc.text(`Duration: ${duration}`, 20, 140);
+
+// Add doctor's name
+doc.text('Doctor\'s Name: Dr. Shara', 20, 160); // Doctor's Name
+                  doc.text('Clinic Address: Agripada, Mumbai, Maharashtra', 20, 170);
+
+                  // Add doctor's signature image
+                  const signatureImg = new Image();
+                  signatureImg.src = 'docsign.png'; // Ensure this is the correct path to the image
+                  signatureImg.onload = function() {
+                      doc.addImage(signatureImg, 'PNG', 20, 190, 50, 20); // Adjust size and position as needed
+
+                      // Save the PDF with the patient name as filename
+                      doc.save(`${patientName}.pdf`);
+                  };
+              };
+          });
+      };
+    </script>
+</body>
+</html>
